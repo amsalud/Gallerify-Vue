@@ -1,4 +1,10 @@
 const { ApolloServer, gql } = require('apollo-server')
+const mongoose = require('mongoose')
+require('dotenv').config({ path: 'variables.env' })
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log('Successfully Connected to MongoDB'))
+  .catch(err => console.error(err))
 
 const typeDefs = gql`
   type Todo {
