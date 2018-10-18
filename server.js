@@ -2,7 +2,10 @@ const { ApolloServer, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 require('dotenv').config({ path: 'variables.env' })
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    process.env.MONGO_URI,
+    { useNewUrlParser: true }
+  )
   .then(() => console.log('Successfully Connected to MongoDB'))
   .catch(err => console.error(err))
 
