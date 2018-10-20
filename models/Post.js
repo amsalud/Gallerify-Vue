@@ -33,7 +33,7 @@ const PostSchema = new mongoose.Schema({
   messages: [
     {
       messageBody: {
-        type: string,
+        type: String,
         required: true
       },
       messageDate: {
