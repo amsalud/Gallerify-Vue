@@ -12,7 +12,7 @@
         <v-divider></v-divider>
         <!-- Side Navbar Links -->
         <v-list>
-          <v-list-tile v-for="item in sideNavItems" :key="item.title" :to="item.link">
+          <v-list-tile ripple v-for="item in sideNavItems" :key="item.title" :to="item.link">
             <v-list-tile-action>
               <v-icon>{{item.icon}}</v-icon>
             </v-list-tile-action>
