@@ -1,10 +1,46 @@
 <template>
   <div id="app">
     <v-app>
-      <router-view />
+      <!-- Horizontal Navbar -->
+      <v-toolbar fixed color="primary" dark>
+        <!-- App Title -->
+        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar-title class="hidden-xs-only">
+          <router-link to="/" tag="span" style="cursor:pointer;">Gallerify</router-link>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <!-- Search Input -->
+        <v-text-field flex prepend-icon="search" placeholder="Search for posts" color="accent" single-line hide-details></v-text-field>
+        <v-spacer></v-spacer>
+        <!-- Horizontal Navbar Links -->
+        <v-toolbar-items class="hidden-xs-only">
+          <v-btn flat v-for="item in horizontalNavItems" :key="item.title" :to="item.link">
+            <v-icon left class="hidden-sm-only">{{item.icon}}</v-icon>
+            {{item.title}}
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+      <!-- App Content -->
+      <main>
+        <v-container class="mt-4">
+          <router-view />
+        </v-container>
+      </main>
     </v-app>
   </div>
 </template>
 
 <script>
+export default {
+  name: 'App',
+  computed: {
+    horizontalNavItems() {
+      return [
+        { icon: 'chat', title: 'Posts', link: '/posts' },
+        { icon: 'lock_open', title: 'Sign In', link: '/signin' },
+        { icon: 'create', title: 'Sign Up', link: 'signup' }
+      ];
+    }
+  }
+};
 </script>
