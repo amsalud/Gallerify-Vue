@@ -1,6 +1,6 @@
 <template>
   <v-container text-xs-center>
-    <ApolloQuery :query="getPostsQuery">
+    <!-- <ApolloQuery :query="getPostsQuery">
       <template slot-scope="{result: {loading, error, data}}">
         <div v-if="loading">Loading...</div>
         <div v-else-if="error">Error {{error.message}}</div>
@@ -12,7 +12,7 @@
           </v-carousel>
         </v-flex>
       </template>
-    </ApolloQuery>
+    </ApolloQuery> -->
   </v-container>
 </template>
 
@@ -20,18 +20,15 @@
 import { gql } from 'apollo-boost';
 export default {
   name: 'home',
-  data: () => ({
-    getPostsQuery: gql`
-      query {
-        getPosts {
-          _id
-          title
-          imageUrl
-          description
-        }
-      }
-    `
-  })
+  methods: {
+    handleGetCarouselPosts() {
+      // reach out to Vuex store, fire action that fetches posts for carousel
+      this.$store.dispatch('getPosts');
+    }
+  },
+  created() {
+    this.handleGetCarouselPosts();
+  }
 };
 </script>
 
