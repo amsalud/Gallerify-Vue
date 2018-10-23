@@ -8,18 +8,24 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    posts: []
+    posts: [],
+    loading: false
   },
   mutations: {
     setPosts: (state, payload) => {
       state.posts = payload;
+    },
+    setLoading: (state, payload) => {
+      state.loading = payload;
     }
   },
   getters: {
-    posts: state => state.posts
+    posts: state => state.posts,
+    loading: state => state.loading
   },
   actions: {
     getPosts: ({ commit }) => {
+      commit('setLoading', true);
       // use ApolloClient to fire getPosts query
       apolloClient
         .query({
@@ -38,9 +44,11 @@ export default new Vuex.Store({
           // Get data from actions to state via mutations
           // Commit passes data from actions to mutation function
           commit('setPosts', data.getPosts);
+          commit('setLoading', false);
         })
         .catch(err => {
           console.error(err);
+          commit('setLoading', false);
         });
     }
   }
