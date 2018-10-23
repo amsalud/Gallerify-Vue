@@ -7,10 +7,19 @@ import { gql } from 'apollo-boost';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    posts: []
+  },
+  mutations: {
+    setPosts: (state, payload) => {
+      state.posts = payload;
+    }
+  },
+  getters: {
+    posts: state => state.posts
+  },
   actions: {
-    getPosts: () => {
+    getPosts: ({ commit }) => {
       // use ApolloClient to fire getPosts query
       apolloClient
         .query({
@@ -25,8 +34,10 @@ export default new Vuex.Store({
             }
           `
         })
-        .then(data => {
-          console.log(data);
+        .then(({ data }) => {
+          // Get data from actions to state via mutations
+          // Commit passes data from actions to mutation function
+          commit('setPosts', data.getPosts);
         })
         .catch(err => {
           console.error(err);
