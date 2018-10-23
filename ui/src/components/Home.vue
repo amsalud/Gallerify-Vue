@@ -1,18 +1,12 @@
 <template>
-  <v-container text-xs-center>
-    <!-- <ApolloQuery :query="getPostsQuery">
-      <template slot-scope="{result: {loading, error, data}}">
-        <div v-if="loading">Loading...</div>
-        <div v-else-if="error">Error {{error.message}}</div>
-        <v-flex v-else-if="data" xs12>
-          <v-carousel v-bind="{'cycle': true}" interval="3000">
-            <v-carousel-item v-for="post in data.getPosts" :key="post._id" :src="post.imageUrl">
-              <h1 id="carousel__title">{{post.title}}</h1>
-            </v-carousel-item>
-          </v-carousel>
-        </v-flex>
-      </template>
-    </ApolloQuery> -->
+  <v-container text-xs-center mt-3>
+    <v-flex xs12>
+      <v-carousel v-bind="{'cycle': true}" interval="3000">
+        <v-carousel-item v-for="post in posts" :key="post._id" :src="post.imageUrl">
+          <h1 id="carousel__title">{{post.title}}</h1>
+        </v-carousel-item>
+      </v-carousel>
+    </v-flex>
   </v-container>
 </template>
 
@@ -24,6 +18,11 @@ export default {
     handleGetCarouselPosts() {
       // reach out to Vuex store, fire action that fetches posts for carousel
       this.$store.dispatch('getPosts');
+    }
+  },
+  computed: {
+    posts() {
+      return this.$store.getters.posts;
     }
   },
   created() {
