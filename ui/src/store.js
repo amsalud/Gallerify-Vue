@@ -22,7 +22,8 @@ export default new Vuex.Store({
     },
     setUser: (state, payload) => {
       state.user = payload;
-    }
+    },
+    clearUser: state => (state.user = null)
   },
   getters: {
     posts: state => state.posts,
@@ -76,6 +77,12 @@ export default new Vuex.Store({
         .catch(err => {
           console.error(err);
         });
+    },
+    signoutUser: () => {
+      // clear user in state
+      commit('clearUser');
+      // remove token in localStorage
+      // end session
     }
   }
 });
