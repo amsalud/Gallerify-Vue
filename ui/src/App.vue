@@ -21,7 +21,7 @@
             </v-list-tile-content>
           </v-list-tile>
           <!-- Signout Button-->
-          <v-list-tile v-if="user">
+          <v-list-tile ripple v-if="user" @click="signoutUser">
             <v-list-tile-action>
               <v-icon>exit_to_app</v-icon>
             </v-list-tile-action>
@@ -55,7 +55,7 @@
             </v-badge>
           </v-btn>
           <!-- Signout Button -->
-          <v-btn flat v-if="user">
+          <v-btn flat v-if="user" @click="signoutUser">
             <v-icon class="hidden-sm-only" left>exit_to_app</v-icon>
             <v-badge right color="blue darken-2">
               Sign Out
@@ -118,6 +118,9 @@ export default {
   methods: {
     toggleSideNav() {
       this.sideNavVisible = !this.sideNavVisible;
+    },
+    signoutUser() {
+      this.$store.dispatch('signoutUser');
     }
   }
 };
