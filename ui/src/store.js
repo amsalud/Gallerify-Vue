@@ -78,11 +78,14 @@ export default new Vuex.Store({
           console.error(err);
         });
     },
-    signoutUser: () => {
+    signoutUser: async ({ commit }) => {
       // clear user in state
       commit('clearUser');
       // remove token in localStorage
+      localStorage.setItem('token', '');
       // end session
+      await apolloClient.resetStore();
+      router.push('/');
     }
   }
 });
