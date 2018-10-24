@@ -39,6 +39,21 @@
             <v-icon left class="hidden-sm-only">{{item.icon}}</v-icon>
             {{item.title}}
           </v-btn>
+          <!-- Profile Button -->
+          <v-btn flat to="/profile" v-if="user">
+            <v-icon class="hidden-sm-only" left>account_box</v-icon>
+            <v-badge right color="blue darken-2">
+              <!-- <span slot="badge">1</span> -->
+              Profile
+            </v-badge>
+          </v-btn>
+          <!-- Signout Button -->
+          <v-btn flat v-if="user">
+            <v-icon class="hidden-sm-only" left>exit_to_app</v-icon>
+            <v-badge right color="blue darken-2">
+              Signout
+            </v-badge>
+          </v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <!-- App Content -->
