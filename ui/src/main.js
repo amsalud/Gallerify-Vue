@@ -49,5 +49,9 @@ new Vue({
   apolloProvider,
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    // Execute getCurrentUser query
+    this.$store.dispatch('getCurrentUser');
+  }
 }).$mount('#app');
