@@ -10,7 +10,7 @@
                         </v-flex>
                     </v-layout>
                     <v-container>
-                        <v-form>
+                        <v-form @submit.prevent="signinUser">
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field v-model="username" prepend-icon="face" label="Username" type="text" required></v-text-field>
@@ -18,7 +18,7 @@
                             </v-layout>
                             <v-layout row>
                                 <v-flex xs12>
-                                    <v-text-field v-model="password" prepend-icon="extension" label="Password" type="text" required></v-text-field>
+                                    <v-text-field v-model="password" prepend-icon="extension" label="Password" type="password" required></v-text-field>
                                 </v-flex>
                             </v-layout>
                             <v-layout row>
@@ -44,6 +44,14 @@ export default {
   data: () => ({
     username: '',
     password: ''
-  })
+  }),
+  methods: {
+    signinUser() {
+      this.$store.dispatch('signinUser', {
+        username: this.username,
+        password: this.password
+      });
+    }
+  }
 };
 </script>
