@@ -1,5 +1,5 @@
 <template>
-    <v-alert type="error" :value="true" dismissible>
+    <v-alert type="error" :value="true" dismissible transition="scale-transition">
         <h3>{{message}}</h3>
     </v-alert>
 </template>
