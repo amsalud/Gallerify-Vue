@@ -25,7 +25,8 @@ export default new Vuex.Store({
       state.user = payload;
     },
     clearUser: state => (state.user = null),
-    setError: (state, payload) => (state.error = payload)
+    setError: (state, payload) => (state.error = payload),
+    clearError: state => (state.error = null)
   },
   getters: {
     posts: state => state.posts,
@@ -68,6 +69,7 @@ export default new Vuex.Store({
         });
     },
     signinUser: ({ commit }, payload) => {
+      commit('clearError');
       // Prevent errors if token is malformed or invalid
       localStorage.setItem('token', '');
       apolloClient
