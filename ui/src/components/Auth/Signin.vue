@@ -16,7 +16,7 @@
                         </v-flex>
                     </v-layout>
                     <v-container>
-                        <v-form @submit.prevent="signinUser">
+                        <v-form v-model="isFormValid" lazy-validation ref="form" @submit.prevent="signinUser">
                             <v-layout row>
                                 <v-flex xs12>
                                     <v-text-field :rules="usernameRules" v-model="username" prepend-icon="face" label="Username" type="text" required></v-text-field>
@@ -29,7 +29,7 @@
                             </v-layout>
                             <v-layout row>
                                 <v-flex xs12>
-                                    <v-btn :loading="loading" color="accent" type="submit">Log In
+                                    <v-btn :loading="loading" color="accent" type="submit" :disabled="!isFormValid">Log In
                                         <span slot="loader" class="custom-loader">
                                             <v-icon light>cached</v-icon>
                                         </span>
@@ -53,6 +53,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'Signin',
   data: () => ({
+    isFormValid: true,
     username: '',
     password: '',
     usernameRules: [
@@ -83,10 +84,12 @@ export default {
   },
   methods: {
     signinUser() {
-      this.$store.dispatch('signinUser', {
-        username: this.username,
-        password: this.password
-      });
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('signinUser', {
+          username: this.username,
+          password: this.password
+        });
+      }
     }
   }
 };
