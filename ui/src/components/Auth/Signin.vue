@@ -1,7 +1,7 @@
 <template>
     <v-container text-xs-center mt-5 pt-5>
         <!-- Error Alert -->
-        <v-layout row wrap>
+        <v-layout row wrap v-if="error">
             <v-flex xs12 sm6 offset-sm3>
                 <form-alert :message="error.message"></form-alert>
             </v-flex>
@@ -53,7 +53,7 @@ export default {
     password: ''
   }),
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'error'])
   },
   watch: {
     user(value) {
