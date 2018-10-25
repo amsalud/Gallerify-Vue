@@ -19,7 +19,7 @@
                         <v-form @submit.prevent="signinUser">
                             <v-layout row>
                                 <v-flex xs12>
-                                    <v-text-field v-model="username" prepend-icon="face" label="Username" type="text" required></v-text-field>
+                                    <v-text-field :rules="usernameRules" v-model="username" prepend-icon="face" label="Username" type="text" required></v-text-field>
                                 </v-flex>
                             </v-layout>
                             <v-layout row>
@@ -54,7 +54,15 @@ export default {
   name: 'Signin',
   data: () => ({
     username: '',
-    password: ''
+    password: '',
+    usernameRules: [
+      // Check if username input
+      username => !!username || 'Username is required',
+      // Username should be less than 10 characters
+      username =>
+        username.length < 10 ||
+        'Username should be less than 10 characters in length'
+    ]
   }),
   computed: {
     ...mapGetters(['user', 'error', 'loading'])
