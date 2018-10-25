@@ -70,6 +70,7 @@ export default new Vuex.Store({
     },
     signinUser: ({ commit }, payload) => {
       commit('clearError');
+      commit('setLoading', true);
       // Prevent errors if token is malformed or invalid
       localStorage.setItem('token', '');
       apolloClient
@@ -78,10 +79,12 @@ export default new Vuex.Store({
           variables: payload
         })
         .then(({ data }) => {
+          commit('setLoading', false);
           localStorage.setItem('token', data.signinUser.token);
           router.go();
         })
         .catch(err => {
+          commit('setLoading', false);
           commit('setError', err);
           console.error(err);
         });
