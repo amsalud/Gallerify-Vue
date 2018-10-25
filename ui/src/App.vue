@@ -89,8 +89,16 @@ export default {
   name: 'App',
   data: () => ({
     sideNavVisible: false,
-    authSnackbar: true
+    authSnackbar: false
   }),
+  watch: {
+    user(newValue, oldValue) {
+      //If we had no value for user before, show snackbar
+      if (oldValue === null) {
+        this.authSnackbar = true;
+      }
+    }
+  },
   computed: {
     ...mapGetters(['user']),
     horizontalNavItems() {
