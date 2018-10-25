@@ -24,7 +24,7 @@
                             </v-layout>
                             <v-layout row>
                                 <v-flex xs12>
-                                    <v-text-field v-model="password" prepend-icon="extension" label="Password" type="password" required></v-text-field>
+                                    <v-text-field :rules="passwordRules" v-model="password" prepend-icon="extension" label="Password" type="password" required></v-text-field>
                                 </v-flex>
                             </v-layout>
                             <v-layout row>
@@ -62,6 +62,12 @@ export default {
       username =>
         username.length < 10 ||
         'Username should be less than 10 characters in length'
+    ],
+    passwordRules: [
+      password => !!password || 'Password is required',
+      // Ensure password is at least 7 characters in length
+      password =>
+        password.length >= 7 || 'Password must be at least 7 characters'
     ]
   }),
   computed: {
