@@ -41,6 +41,7 @@ const getUser = async token => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  formatError: ({name, message})=> ({name, message}),
   context: async ({ req }) => {
     const token = req.headers['authorization'];
     return {
