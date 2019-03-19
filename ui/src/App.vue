@@ -77,6 +77,15 @@
             <h3>You are now signed in!</h3>
             <v-btn dark flat @click="authSnackbar =  false">Close</v-btn>
           </v-snackbar>
+
+           <!-- Auth Error Snackbar -->
+          <v-snackbar v-if="authError" v-model="authErrorSnackbar" color="warning" :timeout="5000" top right>
+            <v-icon class="mr-3">
+              cancel
+            </v-icon>
+            <h3>{{authError.message}}</h3>
+            <v-btn dark to="/signin">Sign in</v-btn>
+          </v-snackbar>
         </v-container>
       </main>
     </v-app>
@@ -89,7 +98,8 @@ export default {
   name: 'App',
   data: () => ({
     sideNavVisible: false,
-    authSnackbar: false
+    authSnackbar: false,
+    authErrorSnackbar: false
   }),
   watch: {
     user(newValue, oldValue) {
@@ -97,10 +107,16 @@ export default {
       if (oldValue === null) {
         this.authSnackbar = true;
       }
+    },
+    authError(value){
+      // If authError is not null show authError snackbar
+      if(value !== null){
+        this.authErrorSnackbar = true;
+      }
     }
   },
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(['authError','user']),
     horizontalNavItems() {
       let items = [
         { icon: 'chat', title: 'Posts', link: '/posts' },
