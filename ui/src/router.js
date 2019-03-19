@@ -2,11 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './components/Home.vue';
 
-import Posts from './components/posts/Posts.vue';
-import AddPost from './components/posts/AddPost.vue';
-import Signin from './components/auth/Signin.vue';
-import Signup from './components/auth/Signup.vue';
-import Profile from './components/auth/Profile.vue';
+import Posts from './components/Posts/Posts.vue';
+import AddPost from './components/Posts/AddPost.vue';
+import Signin from './components/Auth/Signin.vue';
+import Signup from './components/Auth/Signup.vue';
+import Profile from './components/Auth/Profile.vue';
 
 import AuthGuard from './auth-guard';
 
