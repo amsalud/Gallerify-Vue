@@ -103,7 +103,7 @@
                     :loading="loading"
                     color="accent"
                     type="submit"
-                    :disabled="!isFormValid"
+                    :disabled="!isFormValid || loading"
                   >Sign Up
                     <span
                       slot="loader"
