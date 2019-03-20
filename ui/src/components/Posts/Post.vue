@@ -136,7 +136,7 @@
                 </v-list-tile-content>
 
                 <v-list-tile-action class="hidden-xs-only">
-                  <v-icon color="grey">chat_bubble</v-icon>
+                  <v-icon :color="checkIfOwnMessage(message) ? 'accent' : 'grey'">chat_bubble</v-icon>
                 </v-list-tile-action>
               </v-list-tile>
             </template>
@@ -163,7 +163,7 @@ export default {
       messageRules: [
         message => !!message || "Message is required",
         message =>
-          message && message.length < 75 ||
+          (message && message.length < 75) ||
           "Message must be maximum 75 characters in length"
       ]
     };
@@ -220,6 +220,9 @@ export default {
       if (window.innerWidth > 500) {
         this.dialog = !this.dialog;
       }
+    },
+    checkIfOwnMessage(message) {
+      return this.user && this.user._id === message.messageUser._id;
     }
   }
 };
