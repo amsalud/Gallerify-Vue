@@ -30,7 +30,7 @@ module.exports = {
       return posts;
     },
     getPost: async (_, { postId }, { Post }) => {
-      const post = await Post.find({ _id: postId }).populate({
+      const post = await Post.findOne({ _id: postId }).populate({
         path: 'messages.messageUser',
         model: 'User'
       });
