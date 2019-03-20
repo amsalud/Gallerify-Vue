@@ -159,7 +159,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["error", "loading"])
+    ...mapGetters(["error", "loading", "user"])
+  },
+  watch: {
+    user(value) {
+      // if user value changes from null to object, redirect to home page
+      if (value) {
+        this.$router.push("/");
+      }
+    }
   },
   methods: {
     signupUser() {
