@@ -46,3 +46,29 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+/* Post Mutations */
+export const ADD_POST = gql`
+  mutation(
+    $title: String!
+    $imageUrl: String!
+    $categories: [String]!
+    $description: String!
+    $creatorId: ID!
+  ) {
+    addPost(
+      title: $title
+      imageUrl: $imageUrl
+      categories: $categories
+      description: $description
+      creatorId: $creatorId
+    ) {
+      _id
+      title
+      imageUrl
+      categories
+      description
+      createdDate
+    }
+  }
+`;
