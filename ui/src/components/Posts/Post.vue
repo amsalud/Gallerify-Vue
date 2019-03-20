@@ -76,10 +76,11 @@
         v-if="user"
       >
         <v-flex xs12>
-          <v-form @submit.prevent="handleAddPostMessage">
+          <v-form @submit.prevent="handleAddPostMessage" v-model="isFormValid" lazy-validation ref="form">
             <v-layout row>
               <v-flex xs12>
                 <v-text-field
+                  :rules="messageRules"
                   v-model="messageBody"
                   clearable
                   :append-outer-icon="messageBody && 'send'"
@@ -152,7 +153,12 @@ export default {
   data() {
     return {
       dialog: false,
-      messageBody: ""
+      messageBody: "",
+      isFormValid: true,
+      messageRules: [
+        message => !!message || 'Message is required',
+        message => message.length < 75 || 'Message must be maximum 75 characters in length'
+      ]
     };
   },
   apollo: {
