@@ -128,6 +128,7 @@
 
 <script>
 import { setTimeout } from "timers";
+import { mapGetters } from "vuex";
 export default {
   name: "AddPost",
   data() {
