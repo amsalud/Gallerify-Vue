@@ -31,7 +31,7 @@
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon>
-              <v-icon @click="showPostCreator = !showPostCreator">keyboard_arrow_down</v-icon>
+              <v-icon @click="showPostCreator = !showPostCreator">{{`keyboard_arrow_${showPostCreator ? 'up' : 'down'}` }}</v-icon>
             </v-btn>
           </v-card-actions>
           <!-- Post Creator Title -->
