@@ -76,7 +76,12 @@
         v-if="user"
       >
         <v-flex xs12>
-          <v-form @submit.prevent="handleAddPostMessage" v-model="isFormValid" lazy-validation ref="form">
+          <v-form
+            @submit.prevent="handleAddPostMessage"
+            v-model="isFormValid"
+            lazy-validation
+            ref="form"
+          >
             <v-layout row>
               <v-flex xs12>
                 <v-text-field
@@ -156,8 +161,10 @@ export default {
       messageBody: "",
       isFormValid: true,
       messageRules: [
-        message => !!message || 'Message is required',
-        message => message.length < 75 || 'Message must be maximum 75 characters in length'
+        message => !!message || "Message is required",
+        message =>
+          message.length < 75 ||
+          "Message must be maximum 75 characters in length"
       ]
     };
   },
@@ -176,32 +183,34 @@ export default {
   },
   methods: {
     handleAddPostMessage() {
-      const variables = {
-        messageBody: this.messageBody,
-        userId: this.user._id,
-        postId: this.postId
-      };
-      this.$apollo
-        .mutate({
-          mutation: ADD_POST_MESSAGE,
-          variables,
-          update: (cache, { data: { addPostMessage } }) => {
-            const data = cache.readQuery({
-              query: GET_POST,
-              variables: { postId: this.postId }
-            });
-            data.getPost.messages.unshift(addPostMessage);
-            cache.writeQuery({
-              query: GET_POST,
-              variables: { postId: this.postId },
-              data
-            });
-          }
-        })
-        .then(({ data }) => {
-          console.log(data.addPostMessage);
-        })
-        .catch(err => console.error(err));
+      if (this.$refs.form.validate()) {
+        const variables = {
+          messageBody: this.messageBody,
+          userId: this.user._id,
+          postId: this.postId
+        };
+        this.$apollo
+          .mutate({
+            mutation: ADD_POST_MESSAGE,
+            variables,
+            update: (cache, { data: { addPostMessage } }) => {
+              const data = cache.readQuery({
+                query: GET_POST,
+                variables: { postId: this.postId }
+              });
+              data.getPost.messages.unshift(addPostMessage);
+              cache.writeQuery({
+                query: GET_POST,
+                variables: { postId: this.postId },
+                data
+              });
+            }
+          })
+          .then(({ data }) => {
+            console.log(data.addPostMessage);
+          })
+          .catch(err => console.error(err));
+      }
     },
     goToPreviousPage() {
       this.$router.go(-1);
