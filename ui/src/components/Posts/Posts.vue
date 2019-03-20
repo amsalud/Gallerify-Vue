@@ -31,12 +31,15 @@
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon>
-              <v-icon>keyboard_arrow_down</v-icon>
+              <v-icon @click="showPostCreator = !showPostCreator">keyboard_arrow_down</v-icon>
             </v-btn>
           </v-card-actions>
           <!-- Post Creator Title -->
           <v-slide-y-transition>
-            <v-card-text class="grey lighten-4">
+            <v-card-text
+              v-show="showPostCreator"
+              class="grey lighten-4"
+            >
               <v-list-tile avatar>
                 <v-list-tile-avatar>
                   <img
@@ -77,7 +80,8 @@ export default {
   data() {
     return {
       pageNum: 1,
-      showMoreEnabled: true
+      showMoreEnabled: true,
+      showPostCreator: false
     };
   },
   apollo: {
