@@ -131,10 +131,28 @@ import { mapGetters } from "vuex";
 export default {
   name: "Signup",
   data: () => ({
-    isFormValid: true
+    isFormValid: true,
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    usernameRules: [
+      // Check if username input
+      username => !!username || "Username is required",
+      // Username should be less than 10 characters
+      username =>
+        username.length < 10 ||
+        "Username should be less than 10 characters in length"
+    ],
+    passwordRules: [
+      password => !!password || "Password is required",
+      // Ensure password is at least 7 characters in length
+      password =>
+        password.length >= 7 || "Password must be at least 7 characters"
+    ]
   }),
   computed: {
-    ...mapGetters(["error"])
+    ...mapGetters(["error", "loading"])
   },
   methods: {
     handleSignupUser() {}
