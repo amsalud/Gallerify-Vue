@@ -17,7 +17,7 @@
             <v-btn
               large
               icon
-              v-if="user"
+              v-if="!user"
             >
               <v-icon
                 large
