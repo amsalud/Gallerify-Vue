@@ -34,6 +34,31 @@
               <v-icon>keyboard_arrow_down</v-icon>
             </v-btn>
           </v-card-actions>
+          <!-- Post Creator Title -->
+          <v-slide-y-transition>
+            <v-card-text class="grey lighten-4">
+              <v-list-tile avatar>
+                <v-list-tile-avatar>
+                  <img
+                    :src="post.createdBy.avatar"
+                    alt=""
+                  >
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                  <v-list-tile-title class="text--primary">{{post.createdBy.username}}</v-list-tile-title>
+                  <v-list-tile-sub-title class="font-weight-thin">Added {{post.createdDate}}</v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-btn
+                    icon
+                    ripple
+                  >
+                    <v-icon color="grey lighten-1">info</v-icon>
+                  </v-btn>
+                </v-list-tile-action>
+              </v-list-tile>
+            </v-card-text>
+          </v-slide-y-transition>
 
         </v-card>
       </v-flex>
