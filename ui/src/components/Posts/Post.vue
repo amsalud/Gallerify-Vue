@@ -29,6 +29,7 @@
             <v-icon
               color="info"
               large
+              @click="goToPreviousPage"
             >arrow_back</v-icon>
           </v-card-title>
           <v-tooltip right>
@@ -54,7 +55,11 @@
               v-for="(category, index) in getPost.categories"
               :key="index"
             >
-                <v-chip class="mb-3" color="accent" text-color="white">{{category}}</v-chip>
+              <v-chip
+                class="mb-3"
+                color="accent"
+                text-color="white"
+              >{{category}}</v-chip>
             </span>
             <h3>{{getPost.description}}</h3>
           </v-card-text>
@@ -88,6 +93,11 @@ export default {
   },
   computed: {
     ...mapGetters(["user"])
+  },
+  methods: {
+    goToPreviousPage() {
+      this.$router.go(-1);
+    }
   }
 };
 </script>
