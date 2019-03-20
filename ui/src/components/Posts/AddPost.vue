@@ -67,7 +67,7 @@
               <v-layout row>
                 <v-flex xs12>
                   <img
-                    :src="imageUrl"
+                    :src="imagePreviewUrl"
                     height="300px"
                   >
                 </v-flex>
@@ -127,6 +127,7 @@
 </template>
 
 <script>
+import { setTimeout } from "timers";
 export default {
   name: "AddPost",
   data() {
@@ -134,6 +135,7 @@ export default {
       isFormValid: true,
       title: "",
       imageUrl: "",
+      imagePreviewUrl: "",
       categories: [],
       description: "",
       titleRules: [
@@ -142,7 +144,7 @@ export default {
           title.length < 20 ||
           "Title must have less than 20 characters in length"
       ],
-      imageRules: [image => !!image || "Title is required"],
+      imageRules: [image => !!image || "Image url is required"],
       categoriesRules: [
         categories =>
           categories.length >= 1 || "At least one category is  required"
@@ -154,6 +156,11 @@ export default {
           "Description must have less than 200 characters in length"
       ]
     };
+  },
+  watch: {
+    imageUrl(value) {
+      setTimeout(() => (this.imagePreviewUrl = this.imageUrl), 1000);
+    }
   }
 };
 </script>
