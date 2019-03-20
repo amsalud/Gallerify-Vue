@@ -163,7 +163,7 @@ export default {
       messageRules: [
         message => !!message || "Message is required",
         message =>
-          message.length < 75 ||
+          message && message.length < 75 ||
           "Message must be maximum 75 characters in length"
       ]
     };
@@ -207,6 +207,7 @@ export default {
             }
           })
           .then(({ data }) => {
+            this.$refs.form.reset();
             console.log(data.addPostMessage);
           })
           .catch(err => console.error(err));
