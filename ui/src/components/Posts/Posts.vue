@@ -1,19 +1,44 @@
 <template>
-  <v-container v-if="infiniteScrollPosts">
-    <div
-      v-for="post in infiniteScrollPosts.posts"
-      :key="post._id"
+  <v-container
+    fluid
+    grid-list-xl
+  >
+
+    <!-- Post Cards -->
+    <v-layout
+      row
+      wrap
+      v-if="infiniteScrollPosts"
     >
-      <img
-        :src="post.imageUrl"
-        height="100px"
+      <v-flex
+        xs12
+        sm6
+        v-for="post in infiniteScrollPosts.posts"
+        :key="post._id"
       >
-      <h3>{{post.title}}</h3>
-    </div>
-    <v-btn
-      @click="showMorePosts"
-      v-if="showMoreEnabled"
-    >Fetch More</v-btn>
+        <v-card hover>
+          <v-img
+            :src="post.imageUrl"
+            height="30vh"
+            lazy
+          ></v-img>
+          <v-card-actions>
+            <v-card-title primary>
+              <dir>
+                <div class="headline">{{post.title}}</div>
+                <span class="grey--text">{{post.likes}} likes - {{ post.messages.length}} comments</span>
+              </dir>
+            </v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+              <v-icon>keyboard_arrow_down</v-icon>
+            </v-btn>
+          </v-card-actions>
+
+        </v-card>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
