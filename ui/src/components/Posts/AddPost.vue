@@ -157,9 +157,25 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapGetters(["loading", "user"])
+  },
   watch: {
     imageUrl(value) {
       setTimeout(() => (this.imagePreviewUrl = this.imageUrl), 1000);
+    }
+  },
+  methods: {
+    addPost() {
+      if (this.$refs.form.validate) {
+        this.$store.dispatch("addPost", {
+          title: this.title,
+          imageUrl: this.imageUrl,
+          categories: this.categories,
+          description: this.description,
+          creatorId: this.user._id
+        });
+      }
     }
   }
 };
