@@ -38,6 +38,7 @@
               slot="activator"
               :src="getPost.imageUrl"
               id="post__image"
+              @click="toggleImageDialog"
             ></v-img>
           </v-tooltip>
           <!-- Post Image Modal -->
@@ -45,7 +46,7 @@
             <v-card>
               <v-img
                 :src="getPost.imageUrl"
-                height="500px"
+                height="80vh"
               ></v-img>
             </v-card>
           </v-dialog>
@@ -97,6 +98,11 @@ export default {
   methods: {
     goToPreviousPage() {
       this.$router.go(-1);
+    },
+    toggleImageDialog(){
+        if(window.innerWidth > 500){
+            this.dialog = !this.dialog;
+        }
     }
   }
 };
