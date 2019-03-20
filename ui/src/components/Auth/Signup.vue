@@ -162,7 +162,15 @@ export default {
     ...mapGetters(["error", "loading"])
   },
   methods: {
-    handleSignupUser() {}
+    signupUser() {
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("signupUser", {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        });
+      }
+    }
   }
 };
 </script>
