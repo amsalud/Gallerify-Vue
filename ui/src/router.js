@@ -30,7 +30,8 @@ export default new Router({
     {
       path: '/posts/:postId',
       name: 'post',
-      component: Post
+      component: Post,
+      props: true
     },
     {
       path: '/post/add',
