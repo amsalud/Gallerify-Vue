@@ -67,6 +67,24 @@
       </v-flex>
     </v-layout>
 
+    <!-- Fetch More button -->
+    <v-layout
+      column
+      v-if="showMoreEnabled"
+    >
+      <v-flex xs12>
+        <v-layout
+          justify-center
+          row
+        >
+          <v-btn
+            @click="showMorePosts"
+            color="info"
+          >Fetch More</v-btn>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
