@@ -26,7 +26,7 @@
               offset-sm3
               mt-3
             >
-              <h1>Add a post</h1>
+              <h1>Create a post</h1>
             </v-flex>
           </v-layout>
           <!-- Add Post Form -->
@@ -78,6 +78,7 @@
                 <v-flex xs12>
                   <v-select
                     v-model="categories"
+                    :rules="categoriesRules"
                     :items="['Art', 'Education', 'Travel', 'Photography', 'Technology']"
                     multiple
                     label="Categories"
@@ -134,7 +135,24 @@ export default {
       title: "",
       imageUrl: "",
       categories: [],
-      description: ""
+      description: "",
+      titleRules: [
+        title => !!title || "Title is required",
+        title =>
+          title.length < 20 ||
+          "Title must have less than 20 characters in length"
+      ],
+      imageRules: [image => !!image || "Title is required"],
+      categoriesRules: [
+        categories =>
+          categories.length >= 1 || "At least one category is  required"
+      ],
+      descriptionRules: [
+        description => !!description || "Description is required",
+        description =>
+          description.length < 200 ||
+          "Description must have less than 200 characters in length"
+      ]
     };
   }
 };
