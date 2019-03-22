@@ -69,6 +69,8 @@
         <v-spacer></v-spacer>
         <!-- Search Input -->
         <v-text-field
+          v-model="searchTerm"
+          @input="handleSearchPosts"
           flex
           prepend-icon="search"
           placeholder="Search for posts"
@@ -186,12 +188,15 @@ import { mapGetters } from "vuex";
 import { setTimeout } from "timers";
 export default {
   name: "App",
-  data: () => ({
-    sideNavVisible: false,
-    authSnackbar: false,
-    authErrorSnackbar: false,
-    badgeAnimated: false
-  }),
+  data() {
+    return {
+      searchTerm: "",
+      sideNavVisible: false,
+      authSnackbar: false,
+      authErrorSnackbar: false,
+      badgeAnimated: false
+    };
+  },
   watch: {
     user(newValue, oldValue) {
       //If we had no value for user before, show snackbar
@@ -245,6 +250,11 @@ export default {
     }
   },
   methods: {
+    handleSearchPosts() {
+      this.$store.dispatch("searchPosts", {
+        searchTerm: this.searchTerm
+      });
+    },
     toggleSideNav() {
       this.sideNavVisible = !this.sideNavVisible;
     },
