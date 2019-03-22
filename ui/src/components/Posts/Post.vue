@@ -187,9 +187,22 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["user"])
+    ...mapGetters(["user", "userFavourites"])
   },
   methods: {
+    checkIfPostLiked(postId) {
+      // Check if user favourites includes post with id of 'postId'
+      if (
+        this.userFavourites &&
+        this.userFavourites.some(fave => fave._id === postId)
+      ) {
+        this.postLiked = true;
+        return true;
+      } else {
+        this.postLiked = false;
+        return false;
+      }
+    },
     handleLikeToggle() {
       if (this.postLiked) {
         this.handleUnlikePost();
