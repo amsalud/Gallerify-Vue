@@ -214,9 +214,44 @@ export default {
           }
         })
         .then(({ data }) => {
+          // Update user state favourites array
           const updatedUser = {
             ...this.user,
             favourites: data.likePost.favourites
+          };
+          this.$store.commit("setUser", updatedUser);
+        })
+        .catch(err => console.error(err));
+    },
+    handleUnlikePost() {
+      const variables = {
+        postId: this.postId,
+        username: this.user.username
+      };
+      this.$apollo
+        .mutate({
+          mutation: UNLIKE_POST,
+          variables,
+          update: (cache, { data: { likePost } }) => {
+            const data = cache.readQuery({
+              query: GET_POST,
+              variables: { postId: this.postId }
+            });
+
+            data.getPost.likes -= 1;
+
+            cache.writeQuery({
+              query: GET_POST,
+              variables: { postId: this.postId },
+              data
+            });
+          }
+        })
+        .then(({ data }) => {
+          // Update user state favourites array
+          const updatedUser = {
+            ...this.user,
+            favourites: data.unlikePost.favourites
           };
           this.$store.commit("setUser", updatedUser);
         })
