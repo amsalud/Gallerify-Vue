@@ -214,8 +214,11 @@ export default {
           }
         })
         .then(({ data }) => {
-          console.log("user", this.user);
-          console.log("like post", data.likePost);
+          const updatedUser = {
+            ...this.user,
+            favourites: data.likePost.favourites
+          };
+          this.$store.commit("setUser", updatedUser);
         })
         .catch(err => console.error(err));
     },
