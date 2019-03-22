@@ -17,6 +17,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     posts: [],
+    searchResults: [],
     user: null,
     loading: false,
     error: null,
@@ -32,12 +33,17 @@ export default new Vuex.Store({
     setUser: (state, payload) => {
       state.user = payload;
     },
-    clearUser: state => (state.user = null),
-    setError: (state, payload) => (state.error = payload),
-    clearError: state => (state.error = null),
     setAuthError: (state, payload) => {
       state.authError = payload;
-    }
+    },
+    setSearchResults: (state, payload) => {
+      if (payload !== null) {
+        state.searchResults = payload;
+      }
+    },
+    clearUser: state => (state.user = null),
+    setError: (state, payload) => (state.error = payload),
+    clearError: state => (state.error = null)
   },
   getters: {
     posts: state => state.posts,
@@ -71,6 +77,7 @@ export default new Vuex.Store({
         })
         .then(({ data }) => {
           console.log(data.searchPosts);
+          commit('setSearchResults', data.searchPosts);
         })
         .catch(err => console.error(err));
     },
