@@ -43,7 +43,8 @@ export default new Vuex.Store({
     },
     clearUser: state => (state.user = null),
     setError: (state, payload) => (state.error = payload),
-    clearError: state => (state.error = null)
+    clearError: state => (state.error = null),
+    clearSearchResults: state => (state.searchResults = [])
   },
   getters: {
     posts: state => state.posts,
