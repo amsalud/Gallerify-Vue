@@ -95,6 +95,10 @@
                 {{result.title}} -
                 <span class="font-weight-thin">{{formatDescription(result.description)}}</span>
               </v-list-tile-title>
+              <!-- Show icon if post is liked by user -->
+              <v-list-tile-action v-if="checkIfUserFavourite(result._id)">
+                <v-icon color="red">favorite</v-icon>
+              </v-list-tile-action>
             </v-list-tile>
           </v-list>
         </v-card>
@@ -165,7 +169,7 @@
           <v-snackbar
             v-model="authSnackbar"
             color="success"
-            :timeout="3000"
+            :timeout="2000"
             top
             right
           >
@@ -185,7 +189,7 @@
             v-if="authError"
             v-model="authErrorSnackbar"
             color="warning"
-            :timeout="5000"
+            :timeout="2000"
             top
             right
           >
@@ -273,6 +277,12 @@ export default {
   methods: {
     formatDescription(desc) {
       return desc.length > 30 ? `${desc.slice(0, 30)}...` : desc;
+    },
+    checkIfUserFavourite(resultId) {
+      return (
+        this.userFavourites &&
+        this.userFavourites.some(fave => fave._id === resultId)
+      );
     },
     goToSearchResult(resultId) {
       // Clear search term
