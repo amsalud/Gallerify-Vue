@@ -70,6 +70,7 @@
         <!-- Search Input -->
         <v-text-field
           v-model="searchTerm"
+          clearable
           @input="handleSearchPosts"
           flex
           prepend-icon="search"
