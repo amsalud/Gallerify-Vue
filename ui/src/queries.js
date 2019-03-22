@@ -138,7 +138,7 @@ export const ADD_POST = gql`
   }
 `;
 
-export const LIKE_POSTS = gql`
+export const LIKE_POST = gql`
   mutation($postId: ID!, $username: String!) {
     likePost(postId: $postId, username: $username) {
       likes
@@ -151,7 +151,7 @@ export const LIKE_POSTS = gql`
   }
 `;
 
-export const UNLIKE_POSTS = gql`
+export const UNLIKE_POST = gql`
   mutation($postId: ID!, $username: String!) {
     unlikePost(postId: $postId, username: $username) {
       likes
