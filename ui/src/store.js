@@ -39,6 +39,8 @@ export default new Vuex.Store({
     setSearchResults: (state, payload) => {
       if (payload !== null) {
         state.searchResults = payload;
+      } else {
+        state.searchResults = [];
       }
     },
     clearUser: state => (state.user = null),
