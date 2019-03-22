@@ -37,8 +37,8 @@ export const INFINITE_SCROLL_POSTS = gql`
 `;
 
 export const GET_POST = gql`
-  query($postId: ID!){
-    getPost(postId: $postId){
+  query($postId: ID!) {
+    getPost(postId: $postId) {
       _id
       title
       imageUrl
@@ -97,12 +97,16 @@ export const SIGNUP_USER = gql`
 
 /* Post Mutations */
 export const ADD_POST_MESSAGE = gql`
-  mutation($messageBody: String!, $userId: ID!, $postId: ID! ){
-    addPostMessage(messageBody: $messageBody, userId: $userId, postId: $postId){
+  mutation($messageBody: String!, $userId: ID!, $postId: ID!) {
+    addPostMessage(
+      messageBody: $messageBody
+      userId: $userId
+      postId: $postId
+    ) {
       _id
       messageBody
       messageDate
-      messageUser{
+      messageUser {
         _id
         username
         avatar
@@ -130,6 +134,19 @@ export const ADD_POST = gql`
       imageUrl
       categories
       description
+    }
+  }
+`;
+
+export const LIKE_POSTS = gql`
+  mutation($postId: ID!, $username: String!) {
+    likePost(postId: $postId, username: $username) {
+      likes
+      favourites {
+        _id
+        title
+        imageUrl
+      }
     }
   }
 `;
