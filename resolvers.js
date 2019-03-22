@@ -124,6 +124,25 @@ module.exports = {
       }).save();
 
       return { token: createToken(newUser, process.env.SECRET, '24hr') };
+    },
+    likePost: async (_, { postId, username }, { Post, User }) => {
+      // Find Post, add 1 to it's like value
+      const post = await Post.findOneAndUpdate(
+        { _id: postId },
+        { $inc: { likes: 1 } },
+        { new: true }
+      );
+      // Find user, add id of post to its favourites array (which will be populated as Posts)
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $addToSet: { favourites: postId } },
+        { new: true }
+      ).populate({
+        path: 'favourites',
+        model: 'Post'
+      });
+      // Return only from 'post' adn favourites from 'user'
+      return { likes: post.likes, favourites: user.favourites };
     }
   }
 };
