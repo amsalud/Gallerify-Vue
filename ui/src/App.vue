@@ -272,7 +272,7 @@ export default {
   },
   methods: {
     formatDescription(desc) {
-      return desc.length > 20 ? `${desc.slice(0, 20)}...` : desc;
+      return desc.length > 30 ? `${desc.slice(0, 30)}...` : desc;
     },
     goToSearchResult(resultId) {
       // Clear search term
