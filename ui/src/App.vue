@@ -87,11 +87,12 @@
         >
           <v-list>
             <v-list-tile
+              @click="goToSearchResult(result._id)"
               v-for="result in searchResults"
               :key="result._id"
             >
               <v-list-tile-title>
-                {{result.title}}
+                {{result.title}} -
                 <span class="font-weight-thin">{{result.description}}</span>
               </v-list-tile-title>
             </v-list-tile>
@@ -270,6 +271,14 @@ export default {
     }
   },
   methods: {
+    goToSearchResult(resultId) {
+      // Clear search term
+      this.searchTerm = "";
+      // Go to desired result
+      this.$router.push(`/posts/${resultId}`);
+      // Clear search results
+      this.$store.commit("clearSearchResults");
+    },
     handleSearchPosts() {
       this.$store.dispatch("searchPosts", {
         searchTerm: this.searchTerm
