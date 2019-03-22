@@ -93,7 +93,7 @@
             >
               <v-list-tile-title>
                 {{result.title}} -
-                <span class="font-weight-thin">{{result.description}}</span>
+                <span class="font-weight-thin">{{formatDescription(result.description)}}</span>
               </v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -165,7 +165,7 @@
           <v-snackbar
             v-model="authSnackbar"
             color="success"
-            :timeout="5000"
+            :timeout="3000"
             top
             right
           >
@@ -271,6 +271,9 @@ export default {
     }
   },
   methods: {
+    formatDescription(desc) {
+      return desc.length > 20 ? `${desc.slice(0, 20)}...` : desc;
+    },
     goToSearchResult(resultId) {
       // Clear search term
       this.searchTerm = "";
