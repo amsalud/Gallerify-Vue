@@ -131,7 +131,7 @@
             >account_box</v-icon>
             <v-badge
               right
-              color="blue darken-2"
+              color="red darken-2"
               :class="{ 'bounce': badgeAnimated }"
             >
               <span
