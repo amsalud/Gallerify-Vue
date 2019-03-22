@@ -60,5 +60,6 @@ type Mutation {
   addPostMessage(messageBody: String!, userId: ID!, postId: ID!): Message
   signinUser(username: String!, password: String!): Token
   signupUser(username: String!, email: String!, password: String!): Token
-  likePost(postId: ID!, username: String!): LikesFaves
+  likePost(postId: ID!, username: String!): LikesFaves!
+  unlikePost(postId: ID!, username: String!): LikesFaves!
 }
