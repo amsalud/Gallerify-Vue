@@ -15,14 +15,14 @@
           <v-card-title>
             <h1>{{getPost.title}}</h1>
             <v-btn
-              @click="handleLikePost"
+              @click="handleLikeToggle"
               large
               icon
               v-if="user"
             >
               <v-icon
                 large
-                color="grey"
+                :color="checkIfPostLiked(getPost._id) ? 'red' : 'grey'"
               >favorite</v-icon>
             </v-btn>
             <h3 class="ml-3 font-weight-thin">{{getPost.likes}} LIKES</h3>
@@ -164,6 +164,7 @@ export default {
   props: ["postId"],
   data() {
     return {
+      postLiked: false,
       dialog: false,
       messageBody: "",
       isFormValid: true,
@@ -189,6 +190,13 @@ export default {
     ...mapGetters(["user"])
   },
   methods: {
+    handleLikeToggle() {
+      if (this.postLiked) {
+        this.handleUnlikePost();
+      } else {
+        this.handleLikePost();
+      }
+    },
     handleLikePost() {
       const variables = {
         postId: this.postId,
