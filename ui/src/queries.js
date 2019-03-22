@@ -150,3 +150,16 @@ export const LIKE_POSTS = gql`
     }
   }
 `;
+
+export const UNLIKE_POSTS = gql`
+  mutation($postId: ID!, $username: String!) {
+    unlikePost(postId: $postId, username: $username) {
+      likes
+      favourites {
+        _id
+        title
+        imageUrl
+      }
+    }
+  }
+`;
