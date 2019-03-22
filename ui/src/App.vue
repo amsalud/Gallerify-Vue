@@ -71,7 +71,7 @@
         <v-text-field
           v-model="searchTerm"
           clearable
-          @input="handleSearchPosts"
+          @input="debounceInput(handleSearchPosts)"
           flex
           prepend-icon="search"
           placeholder="Search for posts"
@@ -220,7 +220,8 @@ export default {
       sideNavVisible: false,
       authSnackbar: false,
       authErrorSnackbar: false,
-      badgeAnimated: false
+      badgeAnimated: false,
+      timeoutRef: null
     };
   },
   watch: {
@@ -303,6 +304,14 @@ export default {
     },
     signoutUser() {
       this.$store.dispatch("signoutUser");
+    },
+    debounceInput(callbackMethod) {
+      if (!this.timeoutRef) {
+        this.timeoutRef = setTimeout(() => {
+          callbackMethod();
+          this.timeoutRef = null;
+        }, 1000);
+      }
     }
   }
 };
