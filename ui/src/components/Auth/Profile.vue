@@ -130,6 +130,19 @@
       </v-layout>
     </v-container>
 
+    <!-- Edit Post Modal -->
+    <v-dialog
+      xs12
+      sm6
+      offset-sm3
+      persistent
+      v-model="editPostDialog"
+    >
+      <v-card>
+        <v-card-title class="headline grey lighten-2">Update Post</v-card-title>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -137,6 +150,11 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Profile",
+  data() {
+    return {
+      editPostDialog: false
+    };
+  },
   computed: {
     ...mapGetters(["user", "userFavourites", "userPosts"])
   },
