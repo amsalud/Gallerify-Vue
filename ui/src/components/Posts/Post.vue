@@ -322,7 +322,7 @@ export default {
       return this.user && this.user._id === message.messageUser._id;
     },
     formatDate(date) {
-      return moment(new Date(date)).format("ll");
+      return moment(new Date(date)).fromNow();
     }
   }
 };
