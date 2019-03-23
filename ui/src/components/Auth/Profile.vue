@@ -140,6 +140,96 @@
     >
       <v-card>
         <v-card-title class="headline grey lighten-2">Update Post</v-card-title>
+        <!-- Add Post Form -->
+        <v-container>
+          <v-form
+            v-model="isFormValid"
+            lazy-validation
+            ref="form"
+            @submit.prevent="addPost"
+          >
+            <!-- Title Input -->
+            <v-layout row>
+              <v-flex xs12>
+                <v-text-field
+                  :rules="titleRules"
+                  v-model="title"
+                  label="Post Title"
+                  type="text"
+                  required
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+
+            <!-- Image Url -->
+            <v-layout row>
+              <v-flex xs12>
+                <v-text-field
+                  :rules="imageRules"
+                  v-model="imageUrl"
+                  label="Image Url"
+                  type="text"
+                  required
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+
+            <!-- Image Preview -->
+            <v-layout row>
+              <v-flex xs12>
+                <img
+                  :src="imagePreviewUrl"
+                  height="300px"
+                >
+              </v-flex>
+            </v-layout>
+
+            <!-- Categories Select -->
+            <v-layout row>
+              <v-flex xs12>
+                <v-select
+                  v-model="categories"
+                  :rules="categoriesRules"
+                  :items="['Art', 'Education', 'Travel', 'Photography', 'Technology', 'Food', 'Furniture']"
+                  multiple
+                  label="Categories"
+                ></v-select>
+              </v-flex>
+            </v-layout>
+
+            <!-- Description -->
+            <v-layout row>
+              <v-flex xs12>
+                <v-textarea
+                  :rules="descriptionRules"
+                  v-model="description"
+                  label="Description"
+                  type="text"
+                  required
+                ></v-textarea>
+              </v-flex>
+
+            </v-layout>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+
+            </v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              type="submit"
+              class="success--text"
+              flat
+            >Update</v-btn>
+            <v-btn
+              class="error--text"
+              flat
+              @click="editPostDialog = false"
+            >Cancel</v-btn>
+
+          </v-form>
+        </v-container>
       </v-card>
     </v-dialog>
 
@@ -152,7 +242,30 @@ export default {
   name: "Profile",
   data() {
     return {
-      editPostDialog: false
+      editPostDialog: true,
+      isFormValid: true,
+      title: "",
+      imageUrl: "",
+      imagePreviewUrl: "",
+      categories: [],
+      description: "",
+      titleRules: [
+        title => !!title || "Title is required",
+        title =>
+          title.length < 20 ||
+          "Title must have less than 20 characters in length"
+      ],
+      imageRules: [image => !!image || "Image url is required"],
+      categoriesRules: [
+        categories =>
+          categories.length >= 1 || "At least one category is  required"
+      ],
+      descriptionRules: [
+        description => !!description || "Description is required",
+        description =>
+          description.length < 200 ||
+          "Description must have less than 200 characters in length"
+      ]
     };
   },
   computed: {
