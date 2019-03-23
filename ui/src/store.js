@@ -149,7 +149,6 @@ export default new Vuex.Store({
         })
         .then(({ data }) => {
           commit('setUserPosts', data.getUserPosts);
-          console.log(data.getUserPosts);
         })
         .catch(err => console.error(err));
     },
@@ -203,15 +202,22 @@ export default new Vuex.Store({
       await apolloClient.resetStore();
       router.push('/');
     },
-    updateUserPost: ({ commit }, payload) => {
-      console.log('payload', payload);
+    updateUserPost: ({ state, commit }, payload) => {
       apolloClient
         .mutate({
           mutation: UPDATE_USER_POST,
           variables: payload
         })
         .then(({ data }) => {
-          console.log(data.updateUserPost);
+          const index = state.userPosts.findIndex(
+            post => post._id === data.updateUserPost._id
+          );
+          const userPosts = [
+            ...state.userPosts.slice(0, index),
+            data.updateUserPost,
+            ...state.userPosts.slice(index + 1)
+          ];
+          commit('setUserPosts', userPosts);
         })
         .catch(err => console.error(err));
     }
