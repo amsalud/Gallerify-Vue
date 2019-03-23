@@ -7,6 +7,7 @@
     "server": "nodemon server.js",
     "client": "cd ui && npm run serve",
     "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\"",
+    "heroku-prebuild": "npm install -g @vue/cli-service",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ui && npm run heroku-build --prefix ui"
   },
   "keywords": [],
