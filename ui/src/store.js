@@ -10,7 +10,8 @@ import {
   GET_CURRENT_USER,
   ADD_POST,
   SEARCH_POSTS,
-  GET_USER_POSTS
+  GET_USER_POSTS,
+  UPDATE_USER_POST
 } from './queries';
 
 Vue.use(Vuex);
@@ -201,6 +202,18 @@ export default new Vuex.Store({
       // end session
       await apolloClient.resetStore();
       router.push('/');
+    },
+    updateUserPost: ({ commit }, payload) => {
+      console.log('payload', payload);
+      apolloClient
+        .mutate({
+          mutation: UPDATE_USER_POST,
+          variables: payload
+        })
+        .then(({ data }) => {
+          console.log(data.updateUserPost);
+        })
+        .catch(err => console.error(err));
     }
   }
 });
