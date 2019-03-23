@@ -9,7 +9,8 @@ import {
   SIGNUP_USER,
   GET_CURRENT_USER,
   ADD_POST,
-  SEARCH_POSTS
+  SEARCH_POSTS,
+  GET_USER_POSTS
 } from './queries';
 
 Vue.use(Vuex);
@@ -133,6 +134,18 @@ export default new Vuex.Store({
           console.log(data);
         })
         .catch(err => console.log(err));
+    },
+    getUserPosts: ({ commit }, payload) => {
+      apolloClient
+        .query({
+          query: GET_USER_POSTS,
+          variables: payload
+        })
+        .then(({ data }) => {
+          commit('setUserPosts', data.getUserPosts);
+          console.log(data.getUserPosts);
+        })
+        .catch(err => console.error(err));
     },
     signinUser: ({ commit }, payload) => {
       commit('clearError');
