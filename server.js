@@ -16,10 +16,7 @@ const Post = require('./models/Post');
 
 // Connect to MongoDB MLab Database
 mongoose
-  .connect(
-    process.env.MONGO_URI,
-    { useNewUrlParser: true }
-  )
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log('Successfully Connected to MongoDB'))
   .catch(err => console.error(err));
 
@@ -40,7 +37,10 @@ const getUser = async token => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  formatError: ({name, message})=> ({name, message: message.replace('Context creation failed:', '')}),
+  formatError: ({ name, message }) => ({
+    name,
+    message: message.replace('Context creation failed:', '')
+  }),
   context: async ({ req }) => {
     const token = req.headers['authorization'];
     return {
@@ -51,6 +51,6 @@ const server = new ApolloServer({
   }
 });
 
-server.listen().then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`Server listening on ${url}`);
 });
