@@ -19,6 +19,7 @@ export default new Vuex.Store({
   state: {
     posts: [],
     searchResults: [],
+    userPosts: [],
     user: null,
     loading: false,
     error: null,
@@ -27,6 +28,9 @@ export default new Vuex.Store({
   mutations: {
     setPosts: (state, payload) => {
       state.posts = payload;
+    },
+    setUserPosts: (state, payload) => {
+      state.userPosts = payload;
     },
     setLoading: (state, payload) => {
       state.loading = payload;
