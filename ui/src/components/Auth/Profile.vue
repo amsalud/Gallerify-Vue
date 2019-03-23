@@ -272,6 +272,11 @@ export default {
   computed: {
     ...mapGetters(["user", "userFavourites", "userPosts"])
   },
+  watch: {
+    imageUrl(value) {
+      setTimeout(() => (this.imagePreviewUrl = this.imageUrl), 1000);
+    }
+  },
   created() {
     this.handleGetUserPosts();
   },
@@ -291,6 +296,8 @@ export default {
         categories: this.categories,
         description: this.description
       });
+      // Close modal
+      this.editPostDialog = false;
     },
     loadPost(
       { _id, title, imageUrl, categories, description },
