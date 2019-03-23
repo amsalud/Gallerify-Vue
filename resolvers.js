@@ -140,6 +140,11 @@ module.exports = {
       );
       return post;
     },
+    deleteUserPost: async (_, { postId }, { Post }) => {
+      const post = await Post.findOneAndRemove({ _id: postId });
+
+      return post;
+    },
     signinUser: async (_, { username, password }, { User }) => {
       const user = await User.findOne({ username });
       if (!user) {
