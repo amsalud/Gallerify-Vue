@@ -66,6 +66,7 @@
             <v-img
               height="30vh"
               :src="favourite.imageUrl"
+              @click="goToPost(favourite._id)"
             ></v-img>
             <v-card-text>{{favourite.title}}</v-card-text>
           </v-card>
@@ -125,6 +126,7 @@
             <v-img
               height="30vh"
               :src="post.imageUrl"
+              @click="goToPost(post._id)"
             ></v-img>
             <v-card-text>{{post.title}}</v-card-text>
           </v-card>
@@ -284,6 +286,9 @@ export default {
     this.handleGetUserPosts();
   },
   methods: {
+    goToPost(id) {
+      this.$router.push(`/posts/${id}`);
+    },
     handleGetUserPosts() {
       this.$store.dispatch("getUserPosts", {
         userId: this.user._id
