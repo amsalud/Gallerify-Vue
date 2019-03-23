@@ -108,7 +108,7 @@
               fab
               small
               dark
-              @click="editPostDialog = true"
+              @click="loadPost(post)"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -283,6 +283,17 @@ export default {
     },
     handleUpdateUserPost() {
       // update user post
+    },
+    loadPost(
+      { _id, title, imageUrl, categories, description },
+      editPostDialog = true
+    ) {
+      this.editPostDialog = editPostDialog;
+      this.postId = _id;
+      this.title = title;
+      this.imageUrl = imageUrl;
+      this.categories = categories;
+      this.description = description;
     }
   }
 };
