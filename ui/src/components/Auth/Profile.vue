@@ -118,6 +118,7 @@
               fab
               small
               dark
+              @click="handleDeleteUserPost(post)"
             >
               <v-icon>delete</v-icon>
             </v-btn>
@@ -312,6 +313,17 @@ export default {
       this.imageUrl = imageUrl;
       this.categories = categories;
       this.description = description;
+    },
+    handleDeleteUserPost(post) {
+      this.loadPost(post, false);
+      const deletePost = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+      if (deletePost) {
+        this.$store.dispatch("deleteUserPost", {
+          postId: this.postId
+        });
+      }
     }
   }
 };
