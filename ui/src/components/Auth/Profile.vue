@@ -19,7 +19,7 @@
             <v-card-title primary-title>
               <div>
                 <div class="headline">{{user.username}}</div>
-                <div>Joined {{user.joinDate}}</div>
+                <div>Joined {{formatDate(user.joinDate)}}</div>
                 <div class="hidden-xs-only font-weight-thin">{{user.favourites.length}} Favourites</div>
                 <div class="hidden-xs-only font-weight-thin">{{userPosts.length}} Post Added</div>
               </div>
@@ -241,6 +241,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import moment from "moment";
 export default {
   name: "Profile",
   data() {
@@ -324,6 +325,9 @@ export default {
           postId: this.postId
         });
       }
+    },
+    formatDate(date) {
+      return moment(new Date(date)).format("ll");
     }
   }
 };
