@@ -6,10 +6,7 @@
       sm6
       offset-sm3
     >
-      <v-card
-        class="white--text"
-        color="secondary"
-      >
+      <v-card>
         <v-layout>
           <v-flex xs5>
             <v-img
@@ -24,7 +21,7 @@
                 <div class="headline">{{user.username}}</div>
                 <div>Joined {{user.joinDate}}</div>
                 <div class="hidden-xs-only font-weight-thin">{{user.favourites.length}} Favourites</div>
-                <div class="hidden-xs-only font-weight-thin">2 Post Added</div>
+                <div class="hidden-xs-only font-weight-thin">{{userPosts.length}} Post Added</div>
               </div>
             </v-card-title>
           </v-flex>
@@ -84,7 +81,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Profile",
   computed: {
-    ...mapGetters(["user", "userFavourites"])
+    ...mapGetters(["user", "userFavourites", "userPosts"])
   },
   created() {
     this.handleGetUserPosts();
