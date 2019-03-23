@@ -222,7 +222,8 @@
               type="submit"
               class="success--text"
               flat
-            >Update</v-btn>
+              :disabled="!isFormValid"
+            >Save</v-btn>
             <v-btn
               class="error--text"
               flat
@@ -287,17 +288,19 @@ export default {
       });
     },
     handleUpdateUserPost() {
-      // update user post
-      this.$store.dispatch("updateUserPost", {
-        postId: this.postId,
-        userId: this.user._id,
-        title: this.title,
-        imageUrl: this.imageUrl,
-        categories: this.categories,
-        description: this.description
-      });
-      // Close modal
-      this.editPostDialog = false;
+      if (this.$refs.form.validate()) {
+        // update user post
+        this.$store.dispatch("updateUserPost", {
+          postId: this.postId,
+          userId: this.user._id,
+          title: this.title,
+          imageUrl: this.imageUrl,
+          categories: this.categories,
+          description: this.description
+        });
+        // Close modal
+        this.editPostDialog = false;
+      }
     },
     loadPost(
       { _id, title, imageUrl, categories, description },
