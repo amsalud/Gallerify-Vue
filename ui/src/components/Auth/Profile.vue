@@ -283,6 +283,14 @@ export default {
     },
     handleUpdateUserPost() {
       // update user post
+      this.$store.dispatch("updateUserPost", {
+        postId: this.postId,
+        userId: this.user._id,
+        title: this.title,
+        imageUrl: this.imageUrl,
+        categories: this.categories,
+        description: this.description
+      });
     },
     loadPost(
       { _id, title, imageUrl, categories, description },
