@@ -18,7 +18,7 @@
       >
         <v-card hover>
           <v-img
-           @click.native="goToPost(post._id)"
+            @click.native="goToPost(post._id)"
             :src="post.imageUrl"
             height="30vh"
             lazy
@@ -50,7 +50,7 @@
                 </v-list-tile-avatar>
                 <v-list-tile-content>
                   <v-list-tile-title class="text--primary">{{post.createdBy.username}}</v-list-tile-title>
-                  <v-list-tile-sub-title class="font-weight-thin">Added {{post.createdDate}}</v-list-tile-sub-title>
+                  <v-list-tile-sub-title class="font-weight-thin">Added {{formatDate(post.createdDate)}}</v-list-tile-sub-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-btn
@@ -91,6 +91,7 @@
 
 <script>
 import { INFINITE_SCROLL_POSTS } from "../../queries";
+import moment from "moment";
 
 const pageSize = 4;
 
@@ -138,8 +139,11 @@ export default {
         }
       });
     },
-    goToPost(postId){
-      this.$router.push(`/posts/${postId}`)
+    goToPost(postId) {
+      this.$router.push(`/posts/${postId}`);
+    },
+    formatDate(date) {
+      return moment(new Date(date)).format("ll");
     }
   }
 };
