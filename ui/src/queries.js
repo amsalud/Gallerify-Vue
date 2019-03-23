@@ -190,9 +190,22 @@ export const UNLIKE_POST = gql`
 `;
 
 export const UPDATE_USER_POST = gql`
-
-  mutation($postId: ID!, $userId: ID!, $title: String!, $imageUrl: String!, $categories: [String]!, $description: String!){
-    updateUserPost(postId: $postId, userId: $userId, title: $title. imageUrl: $imageUrl, categories: $categories, description: $description){
+  mutation(
+    $postId: ID!
+    $userId: ID!
+    $title: String!
+    $imageUrl: String!
+    $categories: [String]!
+    $description: String!
+  ) {
+    updateUserPost(
+      postId: $postId
+      userId: $userId
+      title: $title
+      imageUrl: $imageUrl
+      categories: $categories
+      description: $description
+    ) {
       _id
       title
       imageUrl
@@ -200,7 +213,7 @@ export const UPDATE_USER_POST = gql`
       categories
       createdDate
       likes
-      createdBy{
+      createdBy {
         id
         avatar
       }
