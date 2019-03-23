@@ -89,6 +89,19 @@ export const GET_CURRENT_USER = gql`
     }
   }
 `;
+export const GET_USER_POSTS = gql`
+  query($userId: ID!) {
+    getUserPosts(userId: $userId) {
+      _id
+      title
+      description
+      imageUrl
+      likes
+      categories
+      createdDate
+    }
+  }
+`;
 
 /* User Mutations */
 export const SIGNIN_USER = gql`
