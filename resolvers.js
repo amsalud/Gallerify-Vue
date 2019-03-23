@@ -79,6 +79,12 @@ module.exports = {
       const totalDocs = await Post.countDocuments();
       const hasMore = totalDocs > pageSize * pageNum;
       return { posts, hasMore };
+    },
+    getUserPosts: async (_, { userId }, { Post }) => {
+      const posts = await Post.find({
+        createdBy: userId
+      });
+      return posts;
     }
   },
   Mutation: {
