@@ -73,6 +73,63 @@
       </v-layout>
     </v-container>
 
+    <!-- Post Created by current user logged in -->
+    <v-container v-if="!userPosts.length">
+      <v-layout row>
+        <v-flex xs12>
+          <h2>You currently don't have any posts.</h2>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container class="mt-3">
+      <v-flex xs-12>
+        <h2 class="font-weight-light">
+          Your Posts
+          <span>{{userPosts.length}}</span>
+        </h2>
+      </v-flex>
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          xs12
+          sm6
+          v-for="post in userPosts"
+          :key="post._id"
+        >
+          <v-card
+            class="mt-3 ml-1 mr-2"
+            hover
+          >
+            <v-btn
+              color="info"
+              floating
+              fab
+              small
+              dark
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+              color="error"
+              floating
+              fab
+              small
+              dark
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
+            <v-img
+              height="30vh"
+              :src="post.imageUrl"
+            ></v-img>
+            <v-card-text>{{post.title}}</v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
   </v-container>
 </template>
 
