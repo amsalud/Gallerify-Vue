@@ -120,6 +120,26 @@ module.exports = {
       });
       return post.messages[0];
     },
+    updateUserPost: async (
+      _,
+      { postId, userId, title, description, categories, imageUrl },
+      { Post }
+    ) => {
+      const post = await Post.findOneAndUpdate(
+        // Find specific post created by a specific user
+        { _id: postId, createdBy: userId },
+        {
+          $set: {
+            title,
+            imageUrl,
+            categories,
+            description
+          }
+        },
+        { new: true }
+      );
+      return post;
+    },
     signinUser: async (_, { username, password }, { User }) => {
       const user = await User.findOne({ username });
       if (!user) {
