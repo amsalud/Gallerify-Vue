@@ -13,6 +13,14 @@ const config = {
           type: 'javascript/auto'
         }
       ]
+    },
+    devServer: {
+      proxy: {
+        '/': {
+          target: 'http://localhost:4000',
+          changeOrigin: true
+        }
+      }
     }
   }
 };
