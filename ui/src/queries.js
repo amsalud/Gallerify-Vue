@@ -214,7 +214,7 @@ export const UPDATE_USER_POST = gql`
       createdDate
       likes
       createdBy {
-        id
+        _id
         avatar
       }
     }
