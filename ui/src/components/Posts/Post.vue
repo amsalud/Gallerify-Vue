@@ -132,7 +132,7 @@
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     {{message.messageUser.username}}
-                    <span class="grey--text text--lighten-1 hidden-xs-only">{{message.messageDate}}</span>
+                    <span class="grey--text text--lighten-1 hidden-xs-only">{{formatDate(message.messageDate)}}</span>
                   </v-list-tile-sub-title>
                 </v-list-tile-content>
 
@@ -151,6 +151,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import moment from "moment";
 import {
   GET_POST,
   ADD_POST,
@@ -319,6 +320,9 @@ export default {
     },
     checkIfOwnMessage(message) {
       return this.user && this.user._id === message.messageUser._id;
+    },
+    formatDate(date) {
+      return moment(new Date(date)).format("ll");
     }
   }
 };
