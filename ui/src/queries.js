@@ -220,3 +220,11 @@ export const UPDATE_USER_POST = gql`
     }
   }
 `;
+
+export const DELETE_USER_POST = gql`
+  mutation($postId: ID!) {
+    deleteUserPost(postID: $postId) {
+      _id
+    }
+  }
+`;
