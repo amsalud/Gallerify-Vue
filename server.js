@@ -68,7 +68,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get(/.*/, (req, res) => res.sendFile(__dirname + '/ui/dist/index.html'));
 }
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.listen({ port }, () =>
   console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
