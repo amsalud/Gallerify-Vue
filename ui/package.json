@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
-    "heroku-build": "vue-cli-service build"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
