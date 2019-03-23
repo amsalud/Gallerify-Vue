@@ -85,6 +85,16 @@ export default {
   name: "Profile",
   computed: {
     ...mapGetters(["user", "userFavourites"])
+  },
+  created() {
+    this.handleGetUserPosts();
+  },
+  methods: {
+    handleGetUserPosts() {
+      this.$store.dispatch("getUserPosts", {
+        userId: this.user._id
+      });
+    }
   }
 };
 </script>
