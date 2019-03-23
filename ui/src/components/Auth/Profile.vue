@@ -108,6 +108,7 @@
               fab
               small
               dark
+              @click="editPostDialog = true"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -146,7 +147,7 @@
             v-model="isFormValid"
             lazy-validation
             ref="form"
-            @submit.prevent="addPost"
+            @submit.prevent="handleUpdateUserPost"
           >
             <!-- Title Input -->
             <v-layout row>
@@ -242,7 +243,7 @@ export default {
   name: "Profile",
   data() {
     return {
-      editPostDialog: true,
+      editPostDialog: false,
       isFormValid: true,
       title: "",
       imageUrl: "",
@@ -279,6 +280,9 @@ export default {
       this.$store.dispatch("getUserPosts", {
         userId: this.user._id
       });
+    },
+    handleUpdateUserPost() {
+      // update user post
     }
   }
 };
