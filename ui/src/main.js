@@ -16,7 +16,7 @@ Vue.use(VueApollo);
 
 // Setup ApolloClient
 export const defaultClient = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: '/graphql',
   // include auth token with request made to backend
   fetchOptions: {
     credentials: 'include'
@@ -41,7 +41,7 @@ export const defaultClient = new ApolloClient({
     if (graphQLErrors) {
       for (let err of graphQLErrors) {
         console.dir(err);
-        if(err.name === 'AuthenticationError'){
+        if (err.name === 'AuthenticationError') {
           // Set auth error in state (to display in snackbar)
           store.commit('setAuthError', err);
           // Signout user to clear token
