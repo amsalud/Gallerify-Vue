@@ -1,4 +1,5 @@
-const { ApolloServer, AuthenticationError } = require('apollo-server');
+const express = require('express');
+const { ApolloServer, AuthenticationError } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +11,9 @@ const typeDefs = fs.readFileSync(filePath, 'utf-8');
 const resolvers = require('./resolvers');
 
 // Import Environment Variables and Mongoose Models
-require('dotenv').config({ path: 'variables.env' });
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: 'variables.env' });
+}
 const User = require('./models/User');
 const Post = require('./models/Post');
 
@@ -37,6 +40,7 @@ const getUser = async token => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
   formatError: ({ name, message }) => ({
     name,
     message: message.replace('Context creation failed:', '')
@@ -51,6 +55,20 @@ const server = new ApolloServer({
   }
 });
 
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`Server listening on ${url}`);
-});
+const app = express();
+server.applyMiddleware({ app });
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('ui/dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'ui', 'dist', 'index.html'));
+  });
+}
+
+const port = 4000;
+
+app.listen({ port }, () =>
+  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
+);
