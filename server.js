@@ -59,12 +59,13 @@ const app = express();
 server.applyMiddleware({ app });
 
 // Server static assets if in production
+
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('ui/dist'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'ui', 'dist', 'index.html'));
-  });
+  // Static folder
+  app.use(express.static(__dirname + '/ui/dist'));
+
+  // Handle SPA
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/ui/dist/index.html'));
 }
 
 const port = 4000;
