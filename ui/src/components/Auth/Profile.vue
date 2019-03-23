@@ -38,8 +38,42 @@
       wrap
       v-if="!userFavourites.length"
     >
-
+      <v-flex xs12>
+        <h2>You currently don't have any favourited posts.</h2>
+      </v-flex>
     </v-layout>
+    <v-container
+      class="mt-3"
+      v-else
+    >
+      <v-flex xs12>
+        <h2 class="font-weight-light">Favourited
+          <span class="font-weight-regular">{{userFavourites.length}}</span>
+        </h2>
+      </v-flex>
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          xs12
+          sm6
+          v-for="favourite in userFavourites"
+          :key="favourite._id"
+        >
+          <v-card
+            class="mt-3 ml-1 mr-2"
+            hover
+          >
+            <v-img
+              height="30vh"
+              :src="favourite.imageUrl"
+            ></v-img>
+            <v-card-text>{{favourite.title}}</v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
 
   </v-container>
 </template>
