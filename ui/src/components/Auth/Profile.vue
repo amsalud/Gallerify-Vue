@@ -33,15 +33,16 @@
     </v-flex>
 
     <!-- Posts Liked by User -->
-    <v-layout
-      row
-      wrap
-      v-if="!userFavourites.length"
-    >
-      <v-flex xs12>
-        <h2>You currently don't have any favourited posts.</h2>
-      </v-flex>
-    </v-layout>
+    <v-container v-if="!userFavourites.length">
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex xs12>
+          <h2>You currently don't have any favourited posts.</h2>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-container
       class="mt-3"
       v-else
